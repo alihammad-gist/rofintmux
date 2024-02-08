@@ -1,0 +1,40 @@
+#!/usr/bin/perl 
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+
+use 5.36.0;
+use Tmux;
+use Path;
+use Zoxide;
+use Rofi;
+use ArrayUtils;
+use Pango;
+
+my @active_dirs = Tmux::list_dirs();
+my @zoxide_dirs = Zoxide::list_dirs();
+
+@active_dirs = sort @active_dirs;
+@zoxide_dirs = sort @zoxide_dirs;
+
+my @dirs =
+  ArrayUtils::remove_common_among( \@active_dirs, \@zoxide_dirs, );
+
+my @active_sessions = Tmux::list_sessions();
+my @inits           = Tmux::list_session_inits();
+
+say "@active_sessions";
+
+my @active_n_inits =
+  ArrayUtils::unique( sort ( @active_sessions, @inits ) );
+
+my @sessions = ( @active_n_inits, @dirs, );
+
+my $ani_size = @active_n_inits;
+my $idx      = Rofi::dmenu(
+  "Choose a session",
+  map { Pango::markup $_ } @sessions,
+);
+
+if ( defined $idx ) {
+  Tmux::activate_session( $sessions[$idx] );
+}
