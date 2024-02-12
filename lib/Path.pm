@@ -1,19 +1,20 @@
 package Path;
 
-use 5.38.0;
-
+use 5.20.0;
+use warnings;
+use autodie;
 
 sub beautify {
-	my $path = shift;
+  my $path = shift;
 
-  if (not -e $path) {
-		return $path;
-	}
+  if ( not -e $path ) {
+    return $path;
+  }
 
-	my $home = $ENV{"HOME"};
-	$path =~ s/\A\Q$home/\~/;
+  my $home = $ENV{"HOME"};
+  $path =~ s/\A\Q$home/\~/;
 
-	return $path;
+  return $path;
 }
 
 1;

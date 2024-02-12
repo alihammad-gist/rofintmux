@@ -1,6 +1,8 @@
 package ArrayUtils;
 
-use 5.38.0;
+use 5.20.0;
+use warnings;
+use autodie;
 
 # removes duplicated entries from a sorted array references
 # uses merging portion of merge sort algorithm from merge sort

@@ -1,7 +1,8 @@
 package Rofi;
 
-use 5.38.0;
-use feature 'defer';
+use 5.20.0;
+use warnings;
+use autodie;
 use open qw( :std :encoding(UTF-8) );
 use IPC::Open3;
 

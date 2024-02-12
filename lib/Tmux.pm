@@ -1,9 +1,11 @@
 package Tmux;
 
-use 5.38.0;
-use feature 'defer';
+use 5.20.0;
+use warnings;
+use autodie;
 use open qw( :std :encoding(UTF-8) );
 use Rofi;
+use Emulator;
 use File::Basename;
 
 sub list_sessions {
@@ -71,7 +73,7 @@ sub get_active_client {
 
   my $ret = $? >> 8;
   if ( $ret != 0 or !@clients_output ) {
-    return '';
+    return undef;
   }
 
 # get the line with newest timestamp (inverting cmp for desc order)
@@ -144,8 +146,16 @@ sub activate_session {
     }
   }
 
-  # switch active client to the session
-  `tmux switch-client -c $client -t $name`;
+  if ( defined $client ) {
+
+    # switch active client to the session
+    `tmux switch-client -c $client -t $name`;
+  }
+  else {
+    # no clients attached to tmux server, run an emulator
+    # and attach it to the newly create session
+    Emulator::new_client($name);
+  }
 
 }
 

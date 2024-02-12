@@ -2,7 +2,9 @@
 use FindBin;
 use lib "$FindBin::Bin/../lib";
 
-use 5.36.0;
+use 5.20.0;
+use warnings;
+use autodie;
 use Tmux;
 use Path;
 use Zoxide;
@@ -18,6 +20,9 @@ my @zoxide_dirs = Zoxide::list_dirs();
 
 my @dirs =
   ArrayUtils::remove_common_among( \@active_dirs, \@zoxide_dirs, );
+
+# removing root from directory (cannot name session with dirname)
+splice( @dirs, 0, 1 ) if $dirs[0] eq "/";
 
 my @active_sessions = Tmux::list_sessions();
 my @inits           = Tmux::list_session_inits();

@@ -1,6 +1,8 @@
 package Pango;
 
-use 5.38.0;
+use 5.20.0;
+use warnings;
+use autodie;
 use File::Basename;
 
 use constant COLOR_FOLDER   => "#2893E3";
@@ -27,7 +29,7 @@ sub markup {
   }
 
   if ( Tmux::is_session_init($item) ) {
-    return qq{${\(icon(" ", COLOR_INIT))}  $item};
+    return render_init($item);
   }
 
   return "   $item";
@@ -36,14 +38,12 @@ sub markup {
 
 sub render_dir {
   my $path = shift;
+  my $name = basename $path;
 
   my $icon = icon( " ", COLOR_FOLDER );
-  if ( dirname($path) eq "/" ) {
-    return "$icon  $path";
-  }
 
-  my $dir = dim( dirname($path) . "/" );
-  return "$icon  $dir${\(basename $path)}";
+  my $dir = dim($path);
+  return "$icon $name $dir";
 }
 
 sub render_hidden_session {
@@ -51,7 +51,7 @@ sub render_hidden_session {
   my $dir  = shift;
 
   my $icon = icon( " ", COLOR_HIDDEN );
-  return "$icon $name ${\(dim($dir))}";
+  return "$icon $name ${\(small($dir))}";
 }
 
 sub render_attached_session {
@@ -59,12 +59,26 @@ sub render_attached_session {
   my $dir  = shift;
 
   my $icon = icon( " ", COLOR_ATTACHED );
-  return "$icon $name ${\(dim($dir))}";
+  return "$icon $name ${\(small($dir))}";
+}
+
+sub render_init {
+  my $name = shift;
+
+  my $icon = icon( " ", COLOR_INIT );
+  return qq{$icon $name};
 }
 
 sub dim {
   my $text = shift;
-  return qq{<span foreground="${\(COLOR_DIM)}">$text</span>};
+  return
+qq{<span foreground="${\(COLOR_DIM)}" size="smaller">$text</span>};
+}
+
+sub small {
+  my $text = shift;
+  return
+qq{<span foreground="${\(COLOR_DIM)}" size="small">$text</span>};
 }
 
 sub icon {
