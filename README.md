@@ -1,4 +1,4 @@
-# Rofi n Tmux
+# RofinTmux
 
 ![Screenshot of rofintmux](screenshot.png "RofinTmux")
 
@@ -13,6 +13,15 @@ terminals, if no client is attached to a tmux session.
   linux distros have perl per-installed)
 - [Rofi](https://wiki.archlinux.org/title/rofi)
 - [Zoxide](https://github.com/ajeetdsouza/zoxide)
+
+## Installation
+
+Download `rofintmux` script from the **Assets** section of the
+[release page](https://github.com/alihammad-gist/rofintmux/releases)
+. Make sure to download it in a directory contained within your
+system's `PATH`. Afterwards run `chmod u+x ~/.local/bin/rofintmux`
+to make the script executable, for example if you have saved
+`rofintmux` script in `~/.local/bin`.
 
 ## Zoxide
 
