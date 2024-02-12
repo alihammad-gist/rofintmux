@@ -11,8 +11,10 @@ terminals, if no client is attached to a tmux session.
 
 - [Perl](https://wiki.archlinux.org/title/Perl) 5.20 or newer (most
   linux distros have perl per-installed)
-- [Rofi](https://wiki.archlinux.org/title/rofi)
+- [Rofi](https://github.com/davatorium/rofi)
 - [Zoxide](https://github.com/ajeetdsouza/zoxide)
+- [Tmux](https://github.com/tmux/tmux)
+- [Nerd Font](https://www.nerdfonts.com/)
 
 ## Installation
 
