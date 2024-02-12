@@ -9,7 +9,7 @@ terminals, if no client is attached to a tmux session.
 
 ## Requirements
 
-- [Perl](https://wiki.archlinux.org/title/Perl) 5.12 or newer (most
+- [Perl](https://wiki.archlinux.org/title/Perl) 5.20 or newer (most
   linux distros have perl per-installed)
 - [Rofi](https://wiki.archlinux.org/title/rofi)
 - [Zoxide](https://github.com/ajeetdsouza/zoxide)
