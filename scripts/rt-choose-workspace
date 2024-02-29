@@ -35,11 +35,17 @@ my @active_n_inits =
 my @sessions = ( @active_n_inits, @dirs, );
 
 my $ani_size = @active_n_inits;
-my $idx      = Rofi::dmenu(
+my ( $idx, $input ) = Rofi::dmenu(
   "Choose a session",
   map { Pango::markup $_ } @sessions,
 );
 
-if ( defined $idx ) {
+exit 0 if not defined $idx;
+
+if ( $idx > -1 ) {
   Tmux::activate_session( $sessions[$idx] );
 }
+elsif ( $input ne "" ) {
+  Tmux::activate_session($input);
+}
+

@@ -13,7 +13,7 @@ sub dmenu {
     my $child_in,
     my $child_out,
     my $child_err,
-    qq/rofi -markup-rows -dmenu -format "i" -p "$prompt"/
+    qq/rofi -markup-rows -dmenu -format "i:f" -p "$prompt"/
   );
 
   for my $item (@workspaces) {
@@ -25,9 +25,10 @@ sub dmenu {
 
   if ( defined $choice_idx ) {
     chomp $choice_idx;
+    return ( split /:/, $choice_idx, 2 );
   }
 
-  return $choice_idx;
+  return;
 }
 
 sub confirm {

@@ -111,18 +111,18 @@ sub session_is_attached {
 }
 
 sub activate_session {
-  my $name   = shift;
+  my $name   = shift;                 # argument is a session name
   my $path   = $ENV{'HOME'};
   my $client = get_active_client();
 
-  if ( -d $name ) {
+  if ( -d $name ) {                   # argument is a path
     $path = $name;
     $name = basename($name);
   }
 
   # create session if it doesn't exist
   if ( not has_session($name) ) {
-    `tmux new-session -d -s $name -c $path`;
+`tmux new-session -d -s $name -c $path -e "TMUX_INIT_PATH=$path"`;
 
     my $ret = $? >> 8;
     if ( $ret != 0 ) {
