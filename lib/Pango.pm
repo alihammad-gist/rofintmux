@@ -8,7 +8,7 @@ use File::Basename;
 use constant COLOR_FOLDER   => "#2893E3";
 use constant COLOR_ATTACHED => "#02f204";
 use constant COLOR_HIDDEN   => "#02f204";
-use constant COLOR_INIT     => "#FDF1E7";
+use constant COLOR_INIT     => COLOR_ATTACHED;
 
 use constant COLOR_DIM => "#7a7a7a";
 
@@ -50,7 +50,7 @@ sub render_hidden_session {
   my $name = shift;
   my $dir  = shift;
 
-  my $icon = icon( " ", COLOR_HIDDEN );
+  my $icon = icon( "󰍹 ", COLOR_HIDDEN );
   return "$icon $name ${\(small($dir))}";
 }
 
@@ -58,7 +58,7 @@ sub render_attached_session {
   my $name = shift;
   my $dir  = shift;
 
-  my $icon = icon( " ", COLOR_ATTACHED );
+  my $icon = icon( "󱎴 ", COLOR_ATTACHED );
   return "$icon $name ${\(small($dir))}";
 }
 
@@ -84,7 +84,7 @@ qq{<span foreground="${\(COLOR_DIM)}" size="small">$text</span>};
 sub icon {
   my ( $icon, $color ) = @_;
 
-  return qq{<span size="large" foreground="$color">$icon</span>};
+  return qq{<span size="small" foreground="$color">$icon</span>};
 }
 
 1;

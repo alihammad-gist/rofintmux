@@ -3,6 +3,7 @@ package ArrayUtils;
 use 5.20.0;
 use warnings;
 use autodie;
+use Tmux;
 
 # removes duplicated entries from a sorted array references
 # uses merging portion of merge sort algorithm from merge sort
@@ -78,6 +79,20 @@ sub unique {
   }
 
   return @new;
+}
+
+sub session_sorter {
+  if ( -d $a ) {
+    return -1;
+  }
+
+  if ( Tmux::is_session_init($a) ) {
+    return 0;
+  }
+
+  if ( Tmux::has_session($a)) {
+    return 1;
+  }
 }
 
 1;

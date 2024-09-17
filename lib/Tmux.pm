@@ -89,7 +89,9 @@ sub get_active_client {
 sub has_session {
   my $session = shift;
 
-  my $out = `tmux has-session -t $session 2>/dev/null`;
+  # -t prefix
+  # -t=exact
+  my $out = `tmux has-session -t="$session" 2>/dev/null`;
   my $ret = $? >> 8;
 
   return not $ret;
