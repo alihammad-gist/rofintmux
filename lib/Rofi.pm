@@ -13,7 +13,7 @@ sub dmenu {
     my $child_in,
     my $child_out,
     my $child_err,
-    qq/rofi -markup-rows -dmenu -format "i:f" -p "$prompt"/
+    qq/rofi -markup-rows -dmenu -i -format "i:f" -p "$prompt"/
   );
 
   for my $item (@workspaces) {
@@ -35,7 +35,7 @@ sub confirm {
   my $question = shift;
 
   my $answer =
-    `echo "Yes|No" | rofi -sep "|" -dmenu -mesg "$question"`;
+    `echo "Yes|No" | rofi -sep "|" -dmenu -i -mesg "$question"`;
   chomp $answer;
 
   if ( $answer eq "Yes" ) {
