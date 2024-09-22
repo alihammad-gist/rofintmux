@@ -151,6 +151,7 @@ sub activate_session {
   if ( defined $client ) {
 
     # switch active client to the session
+    $name =~ s/\.|\:/_/g;
     `tmux switch-client -c $client -t $name`;
   }
   else {
